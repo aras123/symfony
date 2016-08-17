@@ -1,0 +1,61 @@
+{% extends 'AcmeFrontBundle::Studio/studio/base.html.twig' %}
+{% block box %}
+<div class="row">
+  <div class="col-lg-12"><div class="property-desc">
+    <h3>Zdjęcia dla albumu <strong>{{ album.name }}</strong></h3></div>
+    </div>
+</div>
+<div class="property-images-slider">
+    {% if album.albumImages|length > 0 %}
+    <div id="details-slider" class="flexslider">
+        <a href="#" onclick="return false" title="Powiększ zdjęcie" class='fa fa-search-plus property-type-icon zoom-image' style="right:25px;left:auto;"></a>
+        <ul class="slides">
+            {% for image in album.albumImages %}
+            <li>
+                <div class="image-wrapper">
+                    <a href="{{ asset(image.getWebPath)|imagine_filter('image_1024x768') }}" title="Powiększ zdjęcie"  data-title="{{ image.title }}" data-toggle="lightbox" data-gallery="imagesizes">
+                        <img src="{{ asset(image.getWebPath)|imagine_filter('thumb_770x480') }}" title="{{ image.title }}" alt="gallery">
+                    </a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="details-carousel" class="flexslider">
+        <ul class="slides">
+            {% for image in album.albumImages %}
+            <li>
+                <img src="{{ asset(image.getWebPath)|imagine_filter('thumb_108x66') }}" title="{{ image.title }}" alt="{{ image.title }}"/>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+    <div class="col-lg-12">
+    <br/>
+    <div class="alert alert-danger">
+            Brak zdjęć dla tego albumu
+    </div>
+    </div>
+    {% endif %}
+</div>
+<hr>
+<div class="property-desc">
+    <h3>Zobacz inny album:</h3>
+    <div class="row">
+        {% if studio.albums|length > 0 %}
+            {% for album in studio.albums %}
+            <div class="col-md-4 listing-single-item album-item">
+                <div>
+                <a href="{{ url('front_studios_studio_album',{'id':album.id,'company_slug':studio.idCompany.slug,'slug':studio.slug}) }}" title="Album {{ album.name }}">{{ album.name }} ({{ album.albumImages|length }})</a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="alert alert-danger">
+            Brak albumów w studiu kuchennym
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

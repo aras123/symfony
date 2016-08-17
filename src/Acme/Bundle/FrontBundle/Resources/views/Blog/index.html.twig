@@ -1,0 +1,71 @@
+{% extends 'AcmeFrontBundle::layout.html.twig' %}
+{% block content %}
+<div class="container blog-page">
+        <div class="row">
+        <div class="col-md-8 blog-content">
+            {% for post in pagination %}
+            
+                <div class="blog-post">
+                    <div class="meta-data">
+                        <div class="meta-data-item">
+                            <i class="fa fa-calendar-o"></i>
+                            <a href="#">{{ post.dateAdd|date("Y-m-d") }}</a>
+                            <div class="meta-divider">
+                            </div>
+                        </div>
+                        <div class="meta-data-item">
+                            <i class="fa fa-user"></i>
+                            <a href="#">StudiaKuchenne.pl</a>
+                            <div class="meta-divider">
+                            </div>
+                        </div>
+                        <div class="meta-data-item">
+                            <i class="fa fa-comments"></i>
+                            <a href="{{ url('front_blog_post',{'slug':post.slug}) }}#comments">
+                                {% set countComments = post.getComments|length %}
+                                {% if countComments == 1 %}
+                                    {{ countComments }} komentarz
+                                {% elseif countComments > 1 and countComments < 5 %}
+                                    {{ countComments }} komentarze
+                                {% else %}
+                                    {{ countComments }} komentarzy
+                                {% endif %}
+                            </a>
+                            <div class="meta-divider">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <h2><a href="{{ url('front_blog_post',{'slug':post.slug}) }}" title="{{ post.name }}">{{ post.name }}</a></h2>
+                        <div class="featured-image posts-list">
+                            <img src="{{ asset(post.getWebPath)|imagine_filter('thumb_620x337') }}" alt="{{ post.name }}">
+                            <a href="{{ url('front_blog_post',{'slug':post.slug}) }}" title="{{ post.name }}" class="readmore-btn">więcej</a>
+                        </div>
+                    </div>
+                </div>
+                {% if loop.last == FALSE %}<div class="post-divider"></div>{% endif %}
+                
+            
+            {% endfor %}
+            </div>
+
+
+
+
+            <div class="col-md-4 blog-sidebar">
+                <div class="sidebar-widget text-widget">
+                    <h4 class="widget-title">Na blogu</h4>
+                    <p>
+                         Na blogu znajdziesz ciekawoski, nowości ze świata <strong>mebli kuchenych</strong>.<br/>
+                         Informacje o nowo otwartych salonach <strong>mebli kuchennych</strong> oraz o urządzeniach które w są niezbędne w każdej kuchni.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="pagination-wrapper">
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'AcmeAdminBundle::layout.html.twig' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Edycja producenta <b>{{ brand.name }}</b></h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                <div class="box-body">
+
+                    {{ form_start(form)  }}
+                    <div class="form-group {% if form.name.vars.valid==false %}has-error{% endif %}">
+                        {{ form_label(form.name, null, {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}})  }}
+                        <span class="help-block">{{ form_errors(form.name) }}</span>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.description, null, {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(form.description, {'attr': {'class': 'form-control'}})  }}
+                    </div>
+                    <div class="form-group">
+                        {% if brand.logo!='' %}
+                            <img src="{{ asset(brand.getWebPath)|imagine_filter('thumb_0x50') }}?{{ date().timestamp }}"/><br/>
+                        {% endif %}
+                        {{ form_label(form.file_image, null, {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(form.file_image, {'attr': {'class': 'form-control'}})  }}
+                    </div>
+                    <div class="form-group {% if form.website.vars.valid==false %}has-error{% endif %}">
+                        {{ form_label(form.website, null, {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(form.website, {'attr': {'class': 'form-control'}})  }}
+                        <span class="help-block">{{ form_errors(form.website) }}</span>
+                    </div>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}})  }}
+                    <div>
+                        <label class="required"></label> - pola wymagane
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div><!-- /.box -->
+        </div>
+    </div>
+{% endblock %}

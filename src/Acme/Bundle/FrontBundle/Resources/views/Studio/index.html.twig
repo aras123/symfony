@@ -1,0 +1,41 @@
+{% extends 'AcmeFrontBundle::layout.html.twig' %}
+{% block content %}
+<div class="container">
+    <div class="row listings-items-wrapper">
+    <div class="title-box">
+          <h3>Studia kuchenne</h3>
+          <div class="bordered">
+          </div>
+      </div>
+      {% for studio in pagination %}
+      <div class="col-md-4 listing-single-item">
+            <div class="item-inner">
+                <div class="image-wrapper">
+                    <a href="{{ url('front_studios_studio',{'company_slug':studio.idCompany.slug,'slug':studio.slug}) }}" title="{{ studio.idCompany.name ~ " - " ~ studio.city ~ ", " ~ studio.street ~ " " ~ studio.home }}"><img src="{{ studio.thumbnail ? asset(studio.getWebPath)|imagine_filter('thumb_370x270'):asset(studio.idCompany.getWebPath)|imagine_filter('thumb_370x270') }}" title="{{ studio.idCompany.name ~ " - " ~ studio.city ~ ", " ~ studio.street ~ " " ~ studio.home }}" alt="gallery"></a>
+                    <a href="{{ url('front_studios_studio',{'company_slug':studio.idCompany.slug,'slug':studio.slug}) }}" title="{{ studio.idCompany.name ~ " - " ~ studio.city ~ ", " ~ studio.street ~ " " ~ studio.home }}" class='fa fa-home property-type-icon'></a>
+                </div>
+                <div class="desc-box">
+                    <ul class="slide-item-features item-features">
+                        <li><span class="fa fa-map-marker"></span>{{ studio.city }}, ul. {{ studio.street }} {{ studio.home }}, {{ studio.zipcode }}</li>
+                        <li>
+                            <span class="fa fa-info"></span>Producenci urządzeń: {{ studio.StudioBrandDevice|length  }} | Producenci mebli: {{ studio.StudioBrandDevice|length  }}
+                        </li>
+                    </ul>
+                    <div class="buttons-wrapper">
+                        <a href="{{ url('front_studios_studio',{'company_slug':studio.idCompany.slug,'slug':studio.slug}) }}" title="{{ studio.idCompany.name ~ " - " ~ studio.city ~ ", " ~ studio.street ~ " " ~ studio.home }}" class="yellow-btn">Zobacz</a>
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- /Single-item -->
+    {% endfor %}
+</div>
+<div class="pagination-wrapper">
+    <div class="pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+</div>
+</div>
+{% endblock %}

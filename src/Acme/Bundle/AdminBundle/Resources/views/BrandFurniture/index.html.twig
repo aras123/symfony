@@ -1,0 +1,51 @@
+{% extends 'AcmeAdminBundle::layout.html.twig' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-body">
+                    {% if brands|length > 0 %}
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nazwa</th>
+                            <th>Logo</th>
+                            <th>WWW</th>
+                            <th style="width:85px;">Akcja</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for brand in brands %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ brand.name }}</td>
+                                <td>
+                                    {% if brand.logo!='' %}
+                                        <img src="{{ asset(brand.getWebPath)|imagine_filter('thumb_0x50') }}?{{ date().timestamp }}"/>
+                                    {% endif %}
+                                </td>
+                                <td>{{ brand.website }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="{{ url('admin_brand-furniture_edit',{'id':brand.id}) }}"
+                                           class="btn btn-default btn-sm" title="Edytuj"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ url('admin_brand-furniture_delete',{'id':brand.id}) }}"
+                                           class="btn btn-default btn-sm" title="Usuń"><i class="fa fa-trash-o"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                        <div class="alert alert-danger">
+                            Brak producentów mebli w bazie danych - <a href="{{ url('admin_brand-furniture_create') }}">Dodaj producenta</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

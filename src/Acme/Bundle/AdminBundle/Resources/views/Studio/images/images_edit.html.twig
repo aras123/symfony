@@ -1,0 +1,38 @@
+{% extends '@AcmeAdmin/Studio/base.html.twig' %}
+{% block box %}
+    <style>
+        .modal-header {
+            display: none;
+        }
+    </style>
+    <div class="col-lg-12">
+    <a href="{{ url('admin_studio_images',{'id':studio.id}) }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Wróć do listy zdjęć</a>
+        <hr/>
+    </div>
+    <div class="col-lg-2 col-xs-4">
+        <div class="panel panel-default">
+            <div class="panel-image hide-panel-body">
+                <a href="{{ asset(studioImage.getWebPath)|imagine_filter('image_1024x768') }}" data-title="{{ studioImage.title }}" data-toggle="lightbox" data-gallery="imagesizes"><img src="{{ asset(studioImage.getWebPath)|imagine_filter('thumb_290x170') }}" class="panel-image-preview" /></a>
+            </div>
+            <div class="panel-body text-center">
+                <small>{{ studioImage.title }}</small>
+            </div>
+            <div class="panel-footer text-center">
+                <a href="{{ url('admin_studio_images_delete',{'id':studioImage.id}) }}" title="Usuń"><span class="fa fa-trash-o"></span></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-xs-8">
+    {{ form_start(form) }}
+    <div class="form-group {% if form.title.vars.valid==false %}has-error{% endif %}">
+        {{ form_label(form.title, null, {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+        <span class="help-block">{{ form_errors(form.title) }}</span>
+    </div>
+    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+    {{ form_end(form) }}
+    <div>
+                        <label class="required"></label> - pola wymagane
+                    </div>
+</div>
+{% endblock %}

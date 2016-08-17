@@ -1,0 +1,55 @@
+{% extends '@AcmeAdmin/Studio/base.html.twig' %}
+{% block box %}
+    <div class="alert alert-info alert-dismissable">
+        Wybierz producentów których posiadasz sprzęt lub oferujesz go wraz z meblami.
+    </div>
+    <div class="col-md-6">
+    {{ form_start(form)  }}
+    <div class="form-group {% if form.id_brand_device.vars.valid==false %}has-error{% endif %}">
+        {{ form_label(form.id_brand_device, null, {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.id_brand_device, {'attr': {'class': 'form-control select2'}})  }}
+        <span class="help-block">{{ form_errors(form.id_brand_device) }}</span>
+    </div>
+    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}})  }}
+    {{ form_end(form) }}
+    </div>
+    <div class="col-md-6">
+        {% if brandDevice|length > 0 %}
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nazwa</th>
+                    <th>Logo</th>
+                    <th style="width:85px;">Akcja</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for brand in brandDevice %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ brand.idBrandDevice.name }}</td>
+                        <td>
+                            {% if brand.idBrandDevice.logo!='' %}
+                                <img src="{{ asset(brand.idBrandDevice.getWebPath)|imagine_filter('thumb_0x50') }}?{{ date().timestamp }}"/>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{ url('admin_studio_brand-device',{'id':studio.id,'delete_id':brand.id}) }}"
+                                   class="btn btn-default btn-sm" title="Usuń"><i
+                                            class="fa fa-trash-o"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <br/>
+            <div class="alert alert-danger">
+                Brak przypisanych producentów do tego studia
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

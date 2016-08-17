@@ -1,0 +1,50 @@
+{% extends 'AcmeFrontBundle::layout.html.twig' %}
+{% block content %}
+    <div class="container property-details-page">
+        <div class="row">
+            <div class="col-md-8 page-content ">
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist" id="tabs">
+                        <li role="presentation"
+                            class="{% if app.request.get('_route') in ['front_brand-furniture_brand'] %}active{% endif %}">
+                            <a href="{{ url('front_brand-furniture_brand',{'slug':brand.slug}) }}">Dane producenta</a>
+                        </li>   
+                        <li role="presentation"
+                            class="{% if app.request.get('_route') in ['front_brand-furniture_brand_opinions'] %}active{% endif %}">
+                            <a href="{{ url('front_brand-furniture_brand_opinions',{'slug':brand.slug}) }}">Opinie</a>
+                        </li> 
+                    </ul>
+                    
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active">           
+                            <div class="inner-wrapper">
+                                {% block box %}{% endblock %}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Tab panes -->
+                    
+                </div>
+                
+            </div>
+            <div class="col-md-4 blog-sidebar">
+                <div class="sidebar-widget brand-profile">
+                    <div class="image-box text-center">
+                        <img src="{{ asset(brand.getWebPath)|imagine_filter('thumb_0x50') }}" alt="{{ brand.name }}">
+                        
+                    </div>
+                    <div class="desc-box">
+                        <h2>Producent mebli {{ brand.name }}</h2>
+                        <hr/>
+                        <p class="person-number">
+                            <i class="fa fa-globe"></i> <a href="{{ brand.website }}" title="{{ brand.website }}" target="_blank">{{ brand.website }}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'AcmeAdminBundle::layout.html.twig' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-body">
+                    {% if studios|length > 0 %}
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Firma</th>
+                                <th>Województwo</th>
+                                <th>Miasto</th>
+                                <th>Ulica i nr</th>
+                                <th>Data dodania</th>
+                                <th>Aktywne</th>
+                                <th style="width:85px;">Akcja</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for studio in studios %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td><a href="{{ path('admin_company_edit',{'id':studio.idCompany.id}) }}">{{ studio.idCompany.name }}</a></td>
+                                    <td>{{ studio.county|capitalize }}</td>
+                                    <td>{{ studio.city }}</td>
+                                    <td>{{ studio.street }} {{ studio.home }}</td>
+                                    <td>{{ studio.dateAdd|date("Y-m-d") }}</td>
+                                    <td>
+                                        {% if studio.active %}
+                                            <a class="btn btn-success btn-xs">Tak</a>
+                                        {% else %}
+                                            <a class="btn btn-danger btn-xs">Nie</a>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="{{ url('admin_studio_edit',{'id':studio.id}) }}" class="btn btn-default btn-sm" title="Edytuj"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ url('admin_studio_delete',{'id':studio.id}) }}" class="btn btn-default btn-sm" title="Usuń"><i class="fa fa-trash-o"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <div class="alert alert-danger">
+                            Brak studii w bazie danych - <a href="{{ url('admin_studio_create') }}">Dodaj studio</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

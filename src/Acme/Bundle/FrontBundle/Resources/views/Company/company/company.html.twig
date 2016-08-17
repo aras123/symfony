@@ -1,0 +1,22 @@
+{% extends 'AcmeFrontBundle::Company/company/base.html.twig' %}
+{% block box %}
+<div class="property-desc">
+	<h3>Firma <strong>{{ company.name }}</strong></h3>
+	<p>
+		<b>Adres:</b> ul. {{ company.street }} {{ company.home }}, {{ company.zipcode }} {{ company.city }}
+	</p>
+	<p>
+		<b>Telefon:</b> {{ company.phone }}
+	</p>
+	<p>
+		<b>Email:</b> <a href="{{ url('front_company_company_contact',{'slug':company.slug}) }}" title="Wyślij wiadomość do firmy {{ company.name }}">{{ company.email }}</a>
+	</p>
+	<hr/>
+	<p>
+		<b>Studia kuchenne:</b> {{ company.studios|length }}
+	</p>
+	<p>
+		<b>Opinie:</b> {{ company.opinions|length }}
+	</p>
+</div>
+{% endblock %}

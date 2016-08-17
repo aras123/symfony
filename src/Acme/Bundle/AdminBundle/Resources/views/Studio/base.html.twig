@@ -1,0 +1,49 @@
+{% extends '@AcmeAdmin/layout.html.twig' %}
+{% block content %}
+    <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation"
+                class="{% if app.request.get('_route') in ['admin_studio_edit'] %}active{% endif %}">
+                <a href="{{ url('admin_studio_edit', {'id':studio.id}) }}">Dane studia</a>
+            </li>
+            <li role="presentation"
+                class="{% if app.request.get('_route') in ['admin_studio_images','admin_studio_images_edit','admin_studio_images_delete'] %}active{% endif %}">
+                <a href="{{ url('admin_studio_images', {'id':studio.id}) }}">Zdjęcia Główne</a>
+            </li>
+            <li role="presentation"
+                class="{% if app.request.get('_route') in ['admin_studio_albums','admin_studio_albums_edit','admin_studio_albums_delete','admin_studio_albums_images','admin_studio_albums_images_edit'] %}active{% endif %}">
+                <a href="{{ url('admin_studio_albums', {'id':studio.id}) }}">Albumy</a>
+            </li>
+            <li role="presentation"
+                class="{% if app.request.get('_route') in ['admin_studio_brand-furniture'] %}active{% endif %}">
+                <a href="{{ url('admin_studio_brand-furniture', {'id':studio.id}) }}">Producenci mebli</a>
+            </li>
+            <li role="presentation"
+                class="{% if app.request.get('_route') in ['admin_studio_brand-device'] %}active{% endif %}">
+                <a href="{{ url('admin_studio_brand-device', {'id':studio.id}) }}">Producenci urządzeń</a>
+            </li>
+            <li role="presentation"
+                class="{% if app.request.get('_route') in ['admin_studio_expositions','admin_studio_expositions_create','admin_studio_expositions_edit'] %}active{% endif %}">
+                <a href="{{ url('admin_studio_expositions', {'id':studio.id}) }}">Ekspozycje</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="box box-primary">
+                            <!-- form start -->
+                            <div class="box-body">
+                                {% block box %}{% endblock %}
+                            </div>
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

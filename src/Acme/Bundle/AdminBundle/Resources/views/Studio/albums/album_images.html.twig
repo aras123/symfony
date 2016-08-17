@@ -1,0 +1,38 @@
+{% extends '@AcmeAdmin/Studio/base.html.twig' %}
+{% block box %}
+    <div class="col-md-12">
+        <a href="{{ url('admin_studio_albums',{'id':studio.id}) }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Wróć do listy Albumów</a>
+        <hr/>
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.file_image, null, {'label_attr': {'class': 'control-label'}}) }}
+            {{ form_widget(form.file_image, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+    <div class="col-md-12">
+        <hr/>
+        <div class="row">
+            {% for image in albumImages %}
+                <div class="col-lg-2 col-xs-4">
+                    <div class="panel panel-default">
+                        <div class="panel-image hide-panel-body">
+                            <a href="{{ asset(image.getWebPath)|imagine_filter('image_1024x768') }}" data-title="{{ image.title }}" data-toggle="lightbox" data-gallery="imagesizes"><img src="{{ asset(image.getWebPath)|imagine_filter('thumb_290x170') }}" class="panel-image-preview" /></a>
+                        </div>
+                        <div class="panel-body text-center">
+                            <small>{{ image.title }}</small>
+                        </div>
+                        <div class="panel-footer text-center">
+                            <a href="{{ url('admin_studio_albums_images_edit',{'id':image.id}) }}"><span class="fa fa-edit" title="Edycja"></span></a>
+                            <a href="{{ url('admin_studio_images_delete',{'id':image.id}) }}" title="Usuń"><span class="fa fa-trash-o"></span></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

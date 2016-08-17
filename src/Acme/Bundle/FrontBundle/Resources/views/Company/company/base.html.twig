@@ -1,0 +1,65 @@
+{% extends 'AcmeFrontBundle::layout.html.twig' %}
+{% block content %}
+    <div class="container property-details-page">
+        <div class="row">
+            <div class="col-md-8 page-content ">
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist" id="tabs">
+                        <li role="presentation"
+                            class="{% if app.request.get('_route') in ['front_company_company'] %}active{% endif %}">
+                            <a href="{{ url('front_company_company',{'slug':company.slug}) }}" title="Dane firmy {{company.name}}">Dane firmy</a>
+                        </li>
+                        <li role="presentation"
+                            class="{% if app.request.get('_route') in ['front_company_company_studios'] %}active{% endif %}">
+                            <a href="{{ url('front_company_company_studios',{'slug':company.slug}) }}" title="Studia mebli kuchennych {{company.name}}">Studia kuchenne</a>
+                        </li>
+                        <li role="presentation"
+                            class="{% if app.request.get('_route') in ['front_company_company_opinions'] %}active{% endif %}">
+                            <a href="{{ url('front_company_company_opinions',{'slug':company.slug}) }}" title="{{company.name}} opinie">Opinie</a>
+                        </li>
+                        <li role="presentation"
+                            class="{% if app.request.get('_route') in ['front_company_company_contact'] %}active{% endif %}">
+                            <a href="{{ url('front_company_company_contact',{'slug':company.slug}) }}" title="{{company.name}} kontakt">Kontakt</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active">
+                            <div class="inner-wrapper">
+                                {% block box %}{% endblock %}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Tab panes -->
+
+                </div>
+
+            </div>
+            <div class="col-md-4 blog-sidebar">
+                <div class="sidebar-widget company-profile">
+                    <h2>Dane firmy</h2>
+                    <div class="image-box">
+                        <img src="{{ asset(company.getWebPath)|imagine_filter('company_thumb_front') }}" alt="{{company.name}} logo" class="img-responsive">
+                    </div>
+                    <div class="desc-box">
+                        <h4>{{ company.name }}</h4>
+
+                        <p>
+                            <i class="fa fa-map-marker"></i>ul. {{ company.street }} {{ company.home }}, {{ company.zipcode }} {{ company.city }}
+                        </p>
+
+                        <p>
+                            <i class="fa fa-phone"></i> {{ company.phone }}
+                        </p>
+                        <p>
+                            <i class="fa fa-envelope"></i> <a href="{{ url('front_company_company_contact',{'slug':company.slug}) }}" title="Wyślij wiadomość do firmy {{ company.name }}">{{ company.email }}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

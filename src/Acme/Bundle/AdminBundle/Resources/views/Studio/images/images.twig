@@ -1,0 +1,94 @@
+{% extends '@AcmeAdmin/Studio/base.html.twig' %}
+{% block box %}
+<style>
+    .modal-header {
+        display: none;
+    }
+</style>
+<div class="alert alert-info alert-dismissable">
+    Tutaj powinny się znaleźć zdjęcia które będą się wyświetlać na głównej stronie dla studia. 
+</div>
+<div class="col-md-12">
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.file_image, null, {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.file_image, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer">
+        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+    </div>
+    {{ form_end(form) }}
+</div>
+<div class="col-md-12">
+    <hr/>
+    <div class="row">
+        {% for image in studioImages %}
+        <div class="col-lg-2 col-xs-4">
+            <div class="panel panel-default">
+                <div class="panel-image hide-panel-body">
+                    <a href="{{ asset(image.getWebPath)|imagine_filter('image_1024x768') }}" data-title="{{ image.title }}" data-toggle="lightbox" data-gallery="imagesizes"><img src="{{ asset(image.getWebPath)|imagine_filter('thumb_290x170') }}" class="panel-image-preview" /></a>
+                </div>
+                <div class="panel-body text-center">
+                    <small>{{ image.title }}</small>
+                </div>
+                <div class="panel-footer text-center">
+                    <a href="{{ url('admin_studio_images_edit',{'id':image.id}) }}" data-action="changeName" data-image-id="{{image.id}}" data-image-title="{{image.title}}"><span class="fa fa-edit" title="Zmień nazwę"></span></a>
+                    <a href="{{ url('admin_studio_images_delete',{'id':image.id}) }}" title="Usuń"><span class="fa fa-trash-o"></span></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="modal fade" id="modalChangeName">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Zmiana nazwy</h4>
+            </div>
+            <form>
+                <div class="modal-body">
+                  <div class="form-group">
+                      <input type="hidden" name="image_id" value="">
+                      <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                      <label for="title">Nazwa zdjęcia</label>
+                      <input type="text" class="form-control" id="title" name="title" placeholder="Nazwa zdjęcia">
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+    // $(function(){
+    //     $('a[data-action="changeName"]').on('click',function(){
+    //         var image_id = $(this).attr('data-image-id');
+    //         var title = $(this).attr('data-image-title');
+    //         $('#modalChangeName').modal('show');
+    //         $('#modalChangeName .modal-body input[name="image_id"]').val(image_id);
+    //         $('#modalChangeName .modal-body input[name="title"]').val(title);
+
+    //         $('#modalChangeName form button[type="submit"]').on('click',function(){
+    //             $.ajax({
+    //                 url: '{{url('admin_studio_images_edit_ajax')}}',
+    //                 type: 'post',
+    //                 data: {"image_id":image_id},
+    //                 success: function (data) {
+    //                     data
+    //                 }
+    //             });
+    //         });
+
+    //         return false;
+    //     });
+        
+    });
+</script>
+
+{% endblock %}

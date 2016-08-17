@@ -1,0 +1,39 @@
+{% extends 'AcmeFrontBundle::layout.html.twig' %}
+{% block content %}
+<div class="container">
+    <div class="row listings-items-wrapper">
+    <div class="title-box">
+          <h3>Firmy ze studiami kuchennymi</h3>
+          <div class="bordered">
+          </div>
+      </div>
+      {% for company in pagination %}
+      <div class="col-md-4 listing-single-item">
+        <div class="item-inner">
+            <div class="image-wrapper">
+                <a href="{{ url('front_company_company',{'slug':company.slug}) }}" title="{{ company.name }}"><img src="{{ asset(company.getWebPath)|imagine_filter('company_thumb_front') }}" title="{{ company.name }}" alt="gallery"></a>
+            </div>
+            <div class="desc-box">
+                <ul class="slide-item-features item-features">
+                        <li>
+                            <span class="fa fa-info"></span>{{ company.name }} | Studia: {{ company.getStudios|length }}
+                        </li>
+                    </ul>
+                <div class="buttons-wrapper">
+                    <a href="{{ url('front_company_company',{'slug':company.slug}) }}" title="{{ company.name }}" class="yellow-btn">Zobacz</a>
+                </div>
+                <div class="clearfix">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Single-item -->
+    {% endfor %}
+</div>
+<div class="pagination-wrapper">
+    <div class="pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+</div>
+</div>
+{% endblock %}

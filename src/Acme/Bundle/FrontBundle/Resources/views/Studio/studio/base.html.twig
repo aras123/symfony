@@ -1,0 +1,70 @@
+{% extends 'AcmeFrontBundle::layout.html.twig' %}
+{% block content %}
+    <div class="container property-details-page">
+        <div class="row">
+            <div class="col-md-8 page-content ">
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist" id="tabs">
+                        <li role="presentation"
+                            class="{% if app.request.get('_route') in ['front_studios_studio'] %}active{% endif %}">
+                            <a href="{{ url('front_studios_studio',{'company_slug':studio.idCompany.slug,'slug':studio.slug}) }}" title="{{studio.idCompany.name}} {{studio.city}} informacje">Dane studia</a>
+                        </li>
+                        <li role="presentation"
+                            class="{% if app.request.get('_route') in ['front_studios_studio_albums','front_studios_studio_album'] %}active{% endif %}">
+                            <a href="{{ url('front_studios_studio_albums',{'company_slug':studio.idCompany.slug,'slug':studio.slug}) }}" title="{{studio.idCompany.name}} {{studio.city}} zdjęcia">Albumy</a>
+                        </li>
+                        <li role="presentation"
+                            class="{% if app.request.get('_route') in ['front_studios_studio_expositions','front_exposition'] %}active{% endif %}">
+                            <a href="{{ url('front_studios_studio_expositions',{'company_slug':studio.idCompany.slug,'slug':studio.slug}) }}" title="{{studio.idCompany.name}} {{studio.city}} ekspozycje">Ekspozycje</a>
+                        </li>
+                        <li role="presentation"
+                            class="{% if app.request.get('_route') in ['front_studios_studio_opinions'] %}active{% endif %}">
+                            <a href="{{ url('front_studios_studio_opinions',{'company_slug':studio.idCompany.slug,'slug':studio.slug}) }}" title="{{studio.idCompany.name}} {{studio.city}} opinie">Opinie</a>
+                        </li>
+                        <li role="presentation"
+                            class="{% if app.request.get('_route') in ['front_studios_studio_contact'] %}active{% endif %}">
+                            <a href="{{ url('front_studios_studio_contact',{'company_slug':studio.idCompany.slug,'slug':studio.slug}) }}" title="{{studio.idCompany.name}} {{studio.city}} kontakt">Kontakt</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active">
+                            <div class="inner-wrapper">
+                                {% block box %}{% endblock %}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Tab panes -->
+
+                </div>
+
+            </div>
+            <div class="col-md-4 blog-sidebar">
+                <div class="sidebar-widget company-profile">
+                    <h2>Dane studia</h2>
+                    <div class="image-box">
+                        <img src="{{ asset(studio.idCompany.getWebPath)|imagine_filter('company_thumb_front') }}" alt="{{ studio.idCompany.name ~ " - " ~ studio.city ~ ", " ~ studio.street ~ " " ~ studio.home }}">
+                    </div>
+                    <div class="desc-box">
+                        <h4>Studio {{ studio.idCompany.name }}</h4>
+
+                        <p>
+                            <i class="fa fa-map-marker"></i> ul. {{ studio.street }} {{ studio.home }}, {{ studio.zipcode }} {{ studio.city }}
+                        </p>
+
+                        <p>
+                            <i class="fa fa-phone"></i> {{ studio.phone }}
+                        </p>
+                        <p>
+                            <i class="fa fa-envelope"></i> <a href="{{ url('front_studios_studio_contact',{'company_slug':studio.idCompany.slug,'slug':studio.slug}) }}">{{ studio.email }}</a>
+                        </p>
+                        <a href="{{ url('front_company_company',{'slug':studio.idCompany.slug} ) }}" class='gray-btn' title="Firma {{ studio.idCompany.name }}">Zobacz profil firmy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

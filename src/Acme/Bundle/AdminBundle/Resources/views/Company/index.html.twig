@@ -1,0 +1,57 @@
+{% extends 'AcmeAdminBundle::layout.html.twig' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-body">
+                    {% if companies|length > 0 %}
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nazwa</th>
+                                <th>Województwo</th>
+                                <th>Miasto</th>
+                                <th>Ilość studii</th>
+                                <th>Data dodania</th>
+                                <th>Aktywna</th>
+                                <th style="width:85px;">Akcja</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for company in companies %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ company.name }}</td>
+                                    <td>{{ company.county|capitalize }}</td>
+                                    <td>{{ company.city }}</td>
+                                    <td>{{ company.studios|length }}</td>
+                                    <td>{{ company.dateAdd|date("Y-m-d") }}</td>
+                                    <td>
+                                        {% if company.active %}
+                                            <a class="btn btn-success btn-xs">Tak</a>
+                                        {% else %}
+                                            <a class="btn btn-danger btn-xs">Nie</a>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="{{ url('admin_company_edit',{'id':company.id}) }}" class="btn btn-default btn-sm" title="Edytuj"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ url('admin_company_delete',{'id':company.id}) }}" class="btn btn-default btn-sm" title="Usuń"><i class="fa fa-trash-o"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <div class="alert alert-danger">
+                            Brak firm w bazie danych - <a href="{{ url('admin_company_create') }}">Dodaj firmę</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

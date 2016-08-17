@@ -1,0 +1,62 @@
+{% extends 'AcmeFrontBundle::BrandDevice/brand/base.html.twig' %}
+{% block box %}
+<div class="property-desc">
+	<h3>Napisz opinie dla <b>{{ brand.name }}</b></h3>
+	{% include 'AcmeFrontBundle::notification.html.twig' %}
+	{{ form_start(form)  }}
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group {% if form.author.vars.valid==false %}has-error{% endif %}">
+				{{ form_label(form.author, null, {'label_attr': {'class': 'control-label'}}) }}
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-user"></i></span>
+					{{ form_widget(form.author, {'attr': {'class': 'form-control'}})  }}
+				</div>
+				<span class="help-block">{{ form_errors(form.author) }}</span>
+			</div>
+			<div class="form-group {% if form.email.vars.valid==false %}has-error{% endif %}">
+				{{ form_label(form.email, null, {'label_attr': {'class': 'control-label'}}) }}
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+					{{ form_widget(form.email, {'attr': {'class': 'form-control'}})  }}
+				</div>
+				<span class="help-block">{{ form_errors(form.email) }}</span>
+			</div>
+			<div class="form-group {% if form.captcha.vars.valid==false %}has-error{% endif %}">
+				{{ form_widget(form.captcha, {'attr': {'class': 'form-control'}})  }}
+				<span class="help-block">{{ form_errors(form.captcha) }}</span>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group {% if form.description.vars.valid==false %}has-error{% endif %}">
+				{{ form_label(form.description, null, {'label_attr': {'class': 'control-label'}}) }}
+				{{ form_widget(form.description, {'attr': {'class': 'form-control'}})  }}
+				<span class="help-block">{{ form_errors(form.description) }}</span>
+			</div>
+		</div>
+		<div class="col-md-12">
+			{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}})  }}
+		</div>
+	</div>
+	{{ form_end(form) }}
+	<hr/>
+	<div class="row">
+		<div class="col-lg-12" id="opinions">
+			{% for opinion in pagination %}
+			<div class="media">
+							<div class="media-body">
+								<h4 class="media-heading">{{ opinion.author }} <span>/ {{ opinion.dateAdd|date("Y-m-d H:i:s") }}</span></h4>
+								<p>
+									{{ opinion.description }}
+								</p>
+							</div>
+						</div>
+			{% endfor %}
+			<div class="pagination-wrapper">
+            {{ knp_pagination_render(pagination) }}
+    </div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

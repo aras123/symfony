@@ -1,0 +1,13 @@
+{% extends 'AcmeFrontBundle::Studio/studio/base.html.twig' %}
+{% block box %}
+<div class="property-images-slider" style="position:relative;">
+	<a href="{{ url('front_studios_studio_expositions',{'company_slug':studio.idCompany.slug,'slug':studio.slug}) }}" class="btn btn-default" style="position:absolute;border-radius:0px;"><i class="glyphicon glyphicon-chevron-left"></i> Wróć do listy ekspozycji</a>
+    <img src="{{ asset(exposition.getWebPath)|imagine_filter('image_1024x768') }}" title="{{ exposition.name }}" alt="{{ exposition.name }}" class="img-responsive">
+</div>
+<div class="property-desc">
+    <h3>Ekspozycja <strong>{{ exposition.name}}</strong></h3>
+    <p>
+        {{ exposition.description }}
+    </p>
+</div>
+{% endblock %}

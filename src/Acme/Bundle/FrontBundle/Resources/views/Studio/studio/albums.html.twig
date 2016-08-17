@@ -1,0 +1,21 @@
+{% extends 'AcmeFrontBundle::Studio/studio/base.html.twig' %}
+{% block box %}
+<div class="property-desc">
+    <h3>Albumy dla studia</h3>
+    <div class="row">
+        {% if studio.albums|length > 0 %}
+            {% for album in studio.albums %}
+            <div class="col-md-4 listing-single-item album-item">
+                <div>
+                <a href="{{ url('front_studios_studio_album',{'id':album.id,'company_slug':studio.idCompany.slug,'slug':studio.slug}) }}">{{ album.name }} ({{ album.albumImages|length }})</a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="alert alert-danger">
+            Brak albumów w studiu kuchennym
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

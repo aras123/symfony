@@ -1,0 +1,78 @@
+{% extends '@AcmeAdmin/Studio/base.html.twig' %}
+{% block box %}
+<div class="col-md-12">
+    <div class="box collapsed-box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Dodaj ekspozycje</h3>
+            <div class="box-tools pull-right">
+              <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+           {{ form_start(form)  }}
+           <div class="form-group {% if form.name.vars.valid==false %}has-error{% endif %}">
+              {{ form_label(form.name, null, {'label_attr': {'class': 'control-label'}}) }}
+              {{ form_widget(form.name, {'attr': {'class': 'form-control'}})  }}
+              <span class="help-block">{{ form_errors(form.name) }}</span>
+          </div>
+          <div class="form-group">
+              {{ form_label(form.description, null, {'label_attr': {'class': 'control-label'}}) }}
+              {{ form_widget(form.description, {'attr': {'class': 'form-control'}})  }}
+          </div>
+          <div class="form-group">
+              {{ form_label(form.file_image, null, {'label_attr': {'class': 'control-label'}}) }}
+              {{ form_widget(form.file_image, {'attr': {'class': 'form-control'}})  }}
+          </div>
+      </div><!-- /.box-body -->
+      <div class="box-footer">
+       {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}})  }}
+       {{ form_end(form) }}
+       </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="box">
+        <div class="box-body">
+            {% if studioExpositions|length > 0 %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nazwa</th>
+                        <th>Zdjęcie</th>
+                        <th>Data dodania</th>
+                        <th style="width:85px;">Akcja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for exposition in studioExpositions %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ exposition.name }}</td>
+                        <td>
+                           {% if exposition.photo is not empty %}
+                           <a href="{{ asset(exposition.getWebPath)|imagine_filter('image_1024x768') }}?{{ date().timestamp }}?{{ date().timestamp }}" data-title="{{ exposition.name }}" data-toggle="lightbox" data-gallery="imagesizes"><img src="{{ asset(exposition.getWebPath)|imagine_filter('thumb_0x50') }}?{{ date().timestamp }}" class="panel-image-preview" /></a>
+                           {% endif %}
+                       </td>
+                       <td>{{ exposition.dateAdd|date("Y-m-d") }}</td>
+                       <td>
+                        <div class="btn-group">
+                            <a href="{{ url('admin_studio_expositions_edit',{'id':exposition.idStudio.id,'id_exposition':exposition.id}) }}" class="btn btn-default btn-sm" title="Edytuj"><i class="fa fa-edit"></i></a>
+                            <a href="{{ url('admin_studio_expositions_delete',{'id':exposition.id}) }}" class="btn btn-default btn-sm" title="Usuń"><i class="fa fa-trash-o"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="alert alert-danger">
+            Brak ekspozycji w studiu
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+</div>
+{% endblock %}

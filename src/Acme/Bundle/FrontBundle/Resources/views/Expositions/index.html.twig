@@ -1,0 +1,34 @@
+{% extends 'AcmeFrontBundle::layout.html.twig' %}
+{% block content %}
+<div class="container">
+    <div class="row listings-items-wrapper">
+        {% for exposition in pagination %}
+        <div class="col-md-3 listing-single-item">
+            <div class="item-inner">
+                
+                <div class="desc-box">
+                	<center><a href="{{ url('front_exposition',{'slug_exposition':exposition.slug,'slug':exposition.idStudio.slug,'company_slug':exposition.idStudio.idCompany.slug}) }}" title="{{ exposition.name }}" title="{{ exposition.name }}"><img src="{{ asset(exposition.getWebPath)|imagine_filter('thumb_370x270') }}" class="img-responsive" alt="{{ exposition.name }}"></a></center>
+                    
+                    <ul class="slide-item-features item-features">
+                        <li>
+                            <span class="fa fa-info"></span>{{ exposition.name }}
+                        </li>
+                    </ul>
+                    <div class="buttons-wrapper">
+                        <a href="{{ url('front_exposition',{'slug_exposition':exposition.slug,'slug':exposition.idStudio.slug,'company_slug':exposition.idStudio.idCompany.slug}) }}" class="yellow-btn" title="{{ exposition.name }}">Zobacz</a>
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Single-item -->
+        {% endfor %}
+    </div>
+    <div class="pagination-wrapper">
+        <div class="pagination">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

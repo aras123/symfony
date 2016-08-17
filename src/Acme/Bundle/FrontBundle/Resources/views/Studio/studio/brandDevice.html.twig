@@ -1,0 +1,13 @@
+{% extends 'AcmeFrontBundle::Studio/studio/base.html.twig' %}
+{% block box %}
+
+<div class="property-desc">
+    <h3>Producenci urządzeń</h3>
+    <div class="additional-device">
+        {% for brandDevice in studio.StudioBrandDevice %}
+        <a href="#" title="{{ brandDevice.idBrandDevice.name }}"><img src="{{ asset(brandDevice.idBrandDevice.getWebPath)|imagine_filter('thumb_0x50') }}" class="img-thumbnail" alt="{{ brandDevice.idBrandDevice.name }}"></a>
+        {% endfor %}
+    </div>
+    <br/>
+</div>
+{% endblock %}

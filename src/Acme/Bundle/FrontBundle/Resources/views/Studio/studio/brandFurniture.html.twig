@@ -1,0 +1,13 @@
+{% extends 'AcmeFrontBundle::Studio/studio/base.html.twig' %}
+{% block box %}
+
+<div class="property-desc">
+    <h3>Producenci mebli kuchennych</h3>
+    <div class="additional-furniture">
+        {% for brandFurniture in studio.StudioBrandFurniture %}
+        <a href="#" title="{{ brandFurniture.idBrandFurniture.name }}"><img src="{{ asset(brandFurniture.idBrandFurniture.getWebPath)|imagine_filter('thumb_0x50') }}" class="img-thumbnail" alt="{{ brandFurniture.idBrandFurniture.name }}"></a>
+        {% endfor %}
+    </div>
+    <br/>
+</div>
+{% endblock %}

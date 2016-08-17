@@ -1,0 +1,31 @@
+{% extends 'AcmeFrontBundle::Studio/studio/base.html.twig' %}
+{% block box %}
+<div class="property-desc">
+    <h3>Ekspozycje w studiu</h3>
+    <div class="row">
+        {% if studio.expositions|length > 0 %}
+            {% for exposition in studio.expositions %}
+            <div class="col-md-4 listing-single-item">
+                <div class="item-inner">
+                    <div class="image-wrapper">
+                        <a href="{{ url('front_exposition',{'company_slug':studio.idCompany.slug,'slug':studio.slug,'slug_exposition':exposition.slug}) }}" title="Ekspozycja {{ exposition.name }}"><img src="{{ asset(exposition.getWebPath)|imagine_filter('thumb_370x270') }}" alt="{{ exposition.name }}"></a>
+                    </div>
+                    <div class="desc-box no-padding">
+                        <h4><a href="{{ url('front_exposition',{'company_slug':studio.idCompany.slug,'slug':studio.slug,'slug_exposition':exposition.slug}) }}" title="{{ exposition.name }}">{{ exposition.name }}</a></h4>
+                        <div class="buttons-wrapper">
+                            <a href="{{ url('front_exposition',{'company_slug':studio.idCompany.slug,'slug':studio.slug,'slug_exposition':exposition.slug}) }}" title="Ekspozycja {{ exposition.name }}" class="yellow-btn">Szczegóły</a>
+                        </div>
+                        <div class="clearfix">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="alert alert-danger">
+            Brak ekspozycji w studiu kuchennym
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

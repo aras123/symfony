@@ -1,0 +1,45 @@
+{% extends 'AcmeFrontBundle::layout.html.twig' %}
+{% block content %}
+    <div class="container property-details-page">
+        <div class="row">
+            <div class="col-md-4 blog-sidebar">
+                <div class="sidebar-widget brand-profile">
+                    <div class="image-box text-center">
+                        <img src="{{ asset(brand.getWebPath)|imagine_filter('thumb_0x50') }}" alt="{{ brand.name }}">
+                        
+                    </div>
+                    <div class="desc-box">
+                        <h2>{{ brand.name }}</h2>
+
+                        <p class="person-number">
+                            <i class="fa fa-globe"></i> <a href="{{ brand.website }}" title="{{ brand.name }}" target="_blank">{{ brand.website }}</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="sidebar-widget similar-listings-widget">
+                    <h4 class="widget-title">Ostatnie komentarze do producenta</h4>
+                    <ul class="similar-listings">
+                        <li class="tab-content-item">
+                        <div class="pull-left thumb">
+                            <i class="fa fa-comment fa-2x"></i>
+                        </div>
+                        <h5><a href="#">Studio bardzo dobrze wywiązało się z umowy.</a></h5>
+                        </li>
+                        <li class="tab-content-item">
+                        <div class="pull-left thumb">
+                            <i class="fa fa-comment fa-2x"></i>
+                        </div>
+                        <h5><a href="#">Wszystko zostało wykonane bardzo profesionalnie. Ekipa bardzo zorganizowana.</a></h5>
+                        </li>
+                        <li class="tab-content-item">
+                        <div class="pull-left thumb">
+                            <i class="fa fa-comment fa-2x"></i>
+                        </div>
+                        <h5><a href="#">Polecam to studio przedewszystkim za jakoś oraz czas wykonania usługi.</a></h5>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+security:
+     firewalls:
+         panel:
+            anonymous: ~
+            http_basic: ~
+            pattern: ^/panel
+            provider: panel
+            form_login:
+                login_path: /panel/logowanie
+                check_path: /panel/zaloguj
+            logout:
+                 path:   /panel/wyloguj
+                 target: /panel/logowanie
+     access_control:
+
+         - { path: ^/panel/zaloguj, roles: IS_AUTHENTICATED_ANONYMOUSLY  }
+         - { path: ^/panel/logowanie, roles: IS_AUTHENTICATED_ANONYMOUSLY  }
+         - { path: ^/panel, roles: ROLE_COMPANY }
+
+     providers:
+         panel:
+             entity:
+                class: Acme\Bundle\AdminBundle\Entity\Company
+                property: email
+
+     encoders:
+         Acme\Bundle\AdminBundle\Entity\Company:
+            algorithm: sha512

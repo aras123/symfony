@@ -1,0 +1,4 @@
+[{% for book in results -%}
+    {{ {id: book.id, text: book.city}|json_encode|raw }}
+    {%- if not loop.last %},{% endif -%}
+{%- endfor %}]

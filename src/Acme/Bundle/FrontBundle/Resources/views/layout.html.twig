@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="pl">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<!--Page Title-->
+<title>{% if metatags['title'] is defined %}{{ metatags['title'] }} | {% endif %}StudiaKuchenne.pl</title>
+<!--Meta Tags-->
+<meta charset="UTF-8">
+<meta name="author" content="studiakuchenne.pl">
+<meta name="keywords" content="{% if metatags['keywords'] is defined %}{{ metatags['keywords'] }}{% endif %}"/>
+<meta name="description" content="{% if metatags['description'] is defined %}{{ metatags['description'] }}{% endif %}"/>
+<!-- Set Viewport-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" href="{{ asset('bundles/acmefront/img/favicon.ico')}}"/>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="{{ asset('bundles/acmefront/css/bootstrap.min.css')}}" type="text/css"/>
+<link rel="stylesheet" href="{{ asset('bundles/acmefront/css/bootstrap-theme.min.css')}}" type="text/css"/>
+<link rel="stylesheet" href="{{ asset('bundles/acmefront/css/font-awesome.min.css')}}">
+<link rel="stylesheet" href="{{ asset('bundles/acmefront/css/flexslider.css')}}">
+<link rel="stylesheet" href="{{ asset('bundles/acmefront/css/select-theme-default.css')}}">
+<link rel="stylesheet" href="{{ asset('bundles/acmefront/css/owl.carousel.css')}}">
+<link rel="stylesheet" href="{{ asset('bundles/acmefront/css/owl.theme.css')}}">
+<link rel="stylesheet" href="{{ asset('bundles/acmefront/plugins/bootstrap-lightbox/bootstrap-lightbox.min.css')}}">
+<link rel="stylesheet" href="{{ asset('bundles/acmefront/css/style.css')}}" type="text/css"/>
+<!--[if IE]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-75317681-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</head>
+<body id='top'>
+<header>
+<div id="top-strip">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url('front_home') }}" style="padding-left:0px;"><img src="{{ asset('bundles/acmefront/img/logo.png')}}" alt="logo" id="logo"></a>
+        <div id="login-box" class='pull-right'>
+            <a href="{{ url('panel_homepage') }}" class='fa fa-user' title="Twój panel"><span>Twój panel</span></a>
+            <!-- <a href="#" class='fa fa-pencil'><span>Zarejestruj się </span></a> -->
+        </div>
+    </div>
+</div>
+</header>
+<!-- /Header -->
+<div class="slider-section">
+    <div id="premium-bar">
+        <div class="container">
+            <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="{% if app.request.get('_route') in ['front_home'] %}active{% endif %}"><a href="{{ url('front_home') }}">Strona Główna</a></li>
+                        <li class="{% if app.request.get('_route') in ['front_studios','front_studios_studio','front_studios_studio_brand-device','front_studios_studio_brand-furniture','front_studios_studio_contact','front_studios_studio_expositions','front_exposition'] %}active{% endif %}"><a href="{{ url('front_studios') }}">Studia kuchenne</a></li>
+                        <li class="{% if app.request.get('_route') in ['front_company','front_company_company','front_company_company_contact','front_company_company_opinions','front_company_company_studios'] %}active{% endif %}"><a href="{{ url('front_company') }}">Firmy</a></li>
+                        <li class="dropdown {% if app.request.get('_route') in ['front_brand-device','front_brand-furniture'] %}active{% endif %}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Producenci<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url('front_brand-device') }}">Urządzenia kuchenne</a></li>
+                            <li><a href="{{ url('front_brand-furniture') }}">Meble kuchenne</a></li>
+                        </ul>
+                        </li>
+                        <li class="{% if app.request.get('_route') in ['front_blog','front_blog_post'] %}active{% endif %}"><a href="{{ url('front_blog') }}">Blog</a></li>
+                        <li><a href="{{ url('front_contact') }}" title="Kontakt">Kontakt</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+            </nav>
+        </div>
+    </div>
+    {% if app.request.get('_route') in ['front_home'] %}
+    <div class="main-flexslider">
+        <ul class="slides">
+            <li class="slides flex-active-slide" id="slide-n1" style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 2; opacity: 1;"><img src="http://i.imgur.com/7Elp3RK.jpg" alt="MAX-FLIZ" draggable="true">
+            <div class="slide-box">
+                <center><a href="http://studiakuchenne.pl/firma/max-fliz/studia" title="Meble do kuchni MAX-FLIZ"><img src="https://i.imgur.com/BTMbE3R.png" class="img-responsive" alt="Studia kuchenne MAX-FLIZ"/></a></center>
+                <p>
+                </p>
+                <!-- <ul class="slide-item-features">
+                    <li><span class="fa fa-arrows-alt"></span>5000 Sq Ft</li>
+                    <li><span class="fa fa-inbox"></span>3 bedrooms</li>
+                    <li><span class="fa fa-male"></span>2 bathrooms</li>
+                    <li><span class="fa fa-truck"></span>1 garage</li>
+                </ul> -->
+                <hr>
+                <div class="slider-buttons-wrapper col-lg-12">
+                    <center><a href="http://studiakuchenne.pl/firma/max-fliz/studia" class="gray-btn" title="Meble kuchenne MAX-FLIZ"><span class="fa fa-file-text-o"></span>Zobacz wszystkie salony <strong>MAX-FLIZ</strong></a></center>
+                </div>
+            </div>
+            </li>
+            <li class="slides" id="slide-n2" style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; z-index: 2; opacity: 1;"><img src="http://i.imgur.com/is0oEC2.jpg?3" alt="HALUPCZOK" draggable="true">
+            <div class="slide-box">
+                <center><a href="http://studiakuchenne.pl/firma/kuchnie-halupczok/studia" title="Meble do kuchni HALUPCZOK"><img src="http://i.imgur.com/12phIJJ.png" class="img-responsive" alt="Studia kuchenne HALUPCZOK"/></a></center>
+                <p>
+                </p>
+                <!-- <ul class="slide-item-features">
+                    <li><span class="fa fa-arrows-alt"></span>5000 Sq Ft</li>
+                    <li><span class="fa fa-inbox"></span>3 bedrooms</li>
+                    <li><span class="fa fa-male"></span>2 bathrooms</li>
+                    <li><span class="fa fa-truck"></span>1 garage</li>
+                </ul> -->
+                <hr>
+                <div class="slider-buttons-wrapper col-lg-12">
+                    <center><a href="http://studiakuchenne.pl/firma/kuchnie-halupczok/studia" class="gray-btn" title="Meble kuchenne HALUPCZOK"><span class="fa fa-file-text-o"></span>Zobacz wszystkie salony <strong>HALUPCZOK</strong></a></center>
+                </div>
+            </div>
+            </li>
+        </ul>
+    <ul class="flex-direction-nav"><li><a class="flex-prev" href="#"></a></li><li><a class="flex-next" href="#"></a></li></ul></div>
+    {% else %}
+    <!-- head-Section -->
+    <div class="page-title-section">
+        <div class="container">
+            <div class="pull-left page-title">
+                <h2>
+                    {% if global.subtitle is defined %}
+                        {{ global.subtitle|raw }}
+                    {% else %}
+                        Studia Kuchenne
+                    {% endif %}
+                </h2>
+            </div>
+            <div class="pull-right">
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+<!-- Search-Section -->
+<div class="search-section">
+    <div class="container">
+        <form>
+
+            <div class="select-wrapper select-big">
+                <p>
+                    Województwo
+                </p>
+                <select class='elselect'>
+                    <option value="">Wybierz województwo</option>
+                    <option value="dolnośląskie"  selected="selected">Dolnośląskie</option>
+                    <option value="kujawsko-pomorskie" >Kujawsko-pomorskie</option>
+                    <option value="lubelskie" >Lubelskie</option>
+                    <option value="lubuskie" >Lubuskie</option>
+                    <option value="łódzkie" >Łódzkie</option>
+                    <option value="małopolskie" >Małopolskie</option>
+                    <option value="mazowieckie" >Mazowieckie</option>
+                    <option value="opolskie" >Opolskie</option>
+                    <option value="podkarpackie" >Podkarpackie</option>
+                    <option value="podlaskie" >Podlaskie</option>
+                    <option value="pomorskie" >Pomorskie</option>
+                    <option value="śląskie" >Śląskie</option>
+                    <option value="świętokrzyskie" >Świętokrzyskie</option>
+                    <option value="warmińsko-mazurskie" >Warmińsko-mazurskie</option>
+                    <option value="wielkopolskie" >Wielkopolskie</option>
+                    <option value="zachodniopomorskie" >Zachodniopomorskie</option>
+                </select>
+            </div>
+            <div class="select-wrapper select-big">
+                <p>
+                    Miasto
+                </p>
+                <select class='elselect'>
+                    <option value="">Wybierz miasto</option>
+                    <option value="dolnośląskie"  selected="selected">Wrocław</option>
+                    <option value="kujawsko-pomorskie" >Warszawa</option>
+                    <option value="lubelskie" >Olsztyn</option>
+                    <option value="lubuskie" >Gdańsk</option>
+                </select>
+            </div>
+            <input type="submit" value="szukaj" class='yellow-btn' disabled>
+        </form>
+    </div>
+</div>
+<!-- breadcrumbs -->
+<div id="breadcrumbs">
+    <div class="container">
+        <div class="pull-left">
+                {% for breadcrumb in breadcrumbs %}
+                    {% if loop.last==true %}
+                        <a href="{{ breadcrumb.url }}">{{ breadcrumb.title|raw }}</a>
+                    {% else %}
+                        <a href="{{ breadcrumb.url }}">{{ breadcrumb.title|raw }}</a><span class="fa fa-arrow-circle-right sep"></span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        </div>
+
+
+<!-- content-Section -->
+<div class="content-section">
+    {% block content %}{% endblock %}
+</div>
+<!-- footer-section -->
+<footer>
+<div class="container">
+    <div class="col-md-3 footer-about">
+        <a class="logo" href="{{ url('front_home') }}"><img src="{{ asset('bundles/acmefront/img/logo.png')}}" alt="logo" class="img-responsive" style="height:115px;"></a>
+    </div>
+    <div class="col-md-3 footer-recent-posts">
+        <h3 class='footer-title'>Najnowsze wpisy na blogu</h3>
+        <ul>
+            <li><a href="#"><i class="fa fa-arrow-circle-right"></i> Zostały dodane 3 nowe studia kuchenne!</a></li>
+            <li><a href="#"><i class="fa fa-arrow-circle-right"></i> Już dzisiaj NOC DESIGN'U we Wrocławiu - ZAPRASZAMY</a></li>
+        </ul>
+    </div>
+    <div class="col-md-3 footer-contact-info">
+        <h3 class='footer-title'>Kontakt</h3>
+        <p class="website-email">
+            <i class="fa fa-envelope"></i> <a href="{{ url('front_contact') }}" title="Napisz do nas">Napisz do nas</a>
+        </p>
+    </div>
+    <div class="col-md-3 footer-newsletter">
+        <h3 class='footer-title'>Newsletter</h3>
+        <p>
+            Bądź na bierząco z nowościami!</u>
+        </p>
+        <form class='footer-search'>
+            <input type="text" placeholder='e-mail'>
+            <input type="submit" value="Zapisz się" onclick="return alert('Funkcja chwilowo niedostępna');return false;">
+        </form>
+    </div>
+</div>
+</footer>
+<div class="bottom-strip">
+    <div class="container">
+        <div class="col-md-5">
+            <p class='pull-left'>
+                © {{ "now"|date("Y") }} StudiaKuchenne.pl, Wszelkie Prawa Zastrzeżone
+            </p>
+        </div>
+        <div class="col-md-2" class='bottom-strip-middle'>
+            <a href="#top" class='fa fa-arrow-circle-up' id='backtop-btn'></a>
+        </div>
+        <div class="col-md-5">
+            <ul class="social-icons">
+                <li><a href="#" class="fa fa-facebook"></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Javascript -->
+<script type="text/javascript" src="{{ asset('bundles/acmefront/js/jquery-2.1.0.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('bundles/acmefront/js/bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('bundles/acmefront/js/jquery.flexslider-min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('bundles/acmefront/js/select.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('bundles/acmefront/js/owl.carousel.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('bundles/acmefront/plugins/bootstrap-lightbox/bootstrap-lightbox.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('bundles/acmefront/js/script.js')}}"></script>
+</body>
+</html>

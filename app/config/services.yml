@@ -1,0 +1,12 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+services:
+    project.cacheimage_listener:
+        class: Acme\Bundle\AdminBundle\Listener\CacheImageListener
+        arguments: ["@liip_imagine.cache.manager"]
+        tags:
+            - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: preRemove }
+    admin.mailer:
+        class: Acme\Bundle\AdminBundle\Service\Mailer
+        arguments: [@mailer, @templating]

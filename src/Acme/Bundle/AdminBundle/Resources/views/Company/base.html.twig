@@ -1,0 +1,33 @@
+{% extends '@AcmeAdmin/layout.html.twig' %}
+{% block content %}
+    <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation"
+                class="{% if app.request.get('_route') in ['admin_company_edit'] %}active{% endif %}">
+                <a href="{{ url('admin_company_edit', {'id':company.id}) }}">Dane firmy</a>
+            </li>
+            <li role="presentation"
+                class="{% if app.request.get('_route') in ['admin_company_studios'] %}active{% endif %}">
+                <a href="{{ url('admin_company_studios', {'id':company.id}) }}">Studia</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="box box-primary">
+                            <!-- form start -->
+                            <div class="box-body">
+                                {% block box %}{% endblock %}
+                            </div>
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
